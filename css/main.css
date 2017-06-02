@@ -1,0 +1,19 @@
+[v-cloak] {
+  display: none;
+}
+
+.tag {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0 4px;
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+.color-blue {
+  color:#337ab7;
+}
+
+.margin-right {
+  margin-right: 5px;
+}

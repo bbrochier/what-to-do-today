@@ -1,7 +1,12 @@
-// Setup Firebase
-var config = {
-
-};
+// Setup Firebase (see js/config.js)
+// var config = {
+//     apiKey: "xxxxxxx",
+//     authDomain: "xxxxxxx.firebaseapp.com",
+//     databaseURL: "https://xxxxxxx.firebaseio.com",
+//     projectId: "xxxxxxx",
+//     storageBucket: "xxxxxxx.appspot.com",
+//     messagingSenderId: "xxxxxxx"
+//   };
 
 firebase.initializeApp(config);
 

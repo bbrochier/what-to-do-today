@@ -133,6 +133,9 @@
                     <p v-if="todo.location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <a :href="'https://www.google.fr/maps/search/' + todo.location" target="_blank">{{todo.location}}</a></p>
                     <p v-if="todo.price"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span> {{todo.price}}</p>
                     <p v-if="todo.tags"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <span class="tag" v-for="tag in todo.tags" :key="tag['.key']">{{tag}}</span></p>
+                    <p v-if="todo.rating != 0">
+                      <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                    </p>
                   </div>
 
                   <div class="list-group-item-text" v-show="todo.updating">

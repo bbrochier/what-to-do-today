@@ -32,6 +32,7 @@ var app = new Vue({
       price: '',
       tags: '',
       photos: '',
+      rating: '0'
     }
   },
 
@@ -62,6 +63,8 @@ var app = new Vue({
       this.newTodo.price = '';
       this.newTodo.tags = '';
       this.newTodo.photos = '';
+      this.newTodo.status = 'todo';
+      this.newTodo.rating = '0';
     },
 
     toggleUpdate: function(todo) {

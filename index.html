@@ -90,6 +90,29 @@
                         </label>
                       </div>
                     </div>
+                    <div class="form-group" v-show="newTodo.status == 'done'">
+                      <label>Note</label>
+                      <div>
+                        <label class="radio-inline">
+                          <input type="radio" name="radioRating" value="0" v-model="newTodo.rating"> Pas de note
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="radioRating" value="1" v-model="newTodo.rating"> 1
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="radioRating" value="2" v-model="newTodo.rating"> 2
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="radioRating" value="3" v-model="newTodo.rating"> 3
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="radioRating" value="4" v-model="newTodo.rating"> 4
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="radioRating" value="5" v-model="newTodo.rating"> 5
+                        </label>
+                      </div>
+                    </div>
                     <button type="submit" class="btn btn-default btn-primary pull-right" aria-label="Left Align">
                       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
                     </button>
@@ -158,10 +181,32 @@
                     <div class="form-group">
                       <div>
                         <label class="radio-inline">
-                          <input type="radio" name="radioStatus" value="todo" v-model="todo.status"> Todo
+                          <input type="radio" v-bind:name="'radioStatus' + todo['.key']" value="todo" v-model="todo.status"> Todo
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="radioStatus" value="done" v-model="todo.status"> Done
+                          <input type="radio" v-bind:name="'radioStatus' + todo['.key']" value="done" v-model="todo.status"> Done
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group" v-show="todo.status == 'done'">
+                      <div>
+                        <label class="radio-inline">
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="0" v-model="todo.rating"> Pas de note
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="1" v-model="todo.rating"> 1
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="2" v-model="todo.rating"> 2
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="3" v-model="todo.rating"> 3
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="4" v-model="todo.rating"> 4
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="5" v-model="todo.rating"> 5
                         </label>
                       </div>
                     </div>

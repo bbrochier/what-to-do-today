@@ -18,10 +18,10 @@ var app = new Vue({
 
   data: {
     version: '1.0',
+    updating: '',
     newTodo: {
       created: '',
       updated: '',
-      updating: false,
       status: 'todo',
       title: '',
       description: '',
@@ -59,7 +59,6 @@ var app = new Vue({
     addTodo: function() {
       //add created date
       this.newTodo.created = Date.now();
-      this.newTodo.updating = false;
 
       //split tags
       var tags = this.newTodo.tags;
@@ -82,8 +81,12 @@ var app = new Vue({
       this.newTodo.rating = 0;
     },
 
-    toggleUpdate: function(todo) {
-      todo.updating = !todo.updating;
+    openUpdate: function(todo) {
+      this.updating = todo['.key'];
+    },
+
+    closeUpdate: function(todo) {
+      this.updating = '';
     },
 
     updateTodo: function(todo) {
@@ -102,8 +105,10 @@ var app = new Vue({
       var todotags = todo.tags.toString();
       //remove trailing commas and split on commas
       todo.tags = todotags.replace(/(^,)|(,$)/g, '').replace(/ , /g, ',').replace(/, /g, ',').replace(/ ,/g, ',').split(',');
-
+      //set to firebase
       todosRef.child(todo['.key']).child('tags').set(todo.tags);
+      //close edit
+      this.updating = '';
     },
 
     removeTodo: function(todo) {

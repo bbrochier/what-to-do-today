@@ -94,22 +94,22 @@
                       <label>Note</label>
                       <div>
                         <label class="radio-inline">
-                          <input type="radio" name="radioRating" value="0" v-model="newTodo.rating"> Pas de note
+                          <input type="radio" name="radioRating" v-bind:value="0" v-model="newTodo.rating"> Pas de note
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="radioRating" value="1" v-model="newTodo.rating"> 1
+                          <input type="radio" name="radioRating" v-bind:value="1" v-model="newTodo.rating"> 1
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="radioRating" value="2" v-model="newTodo.rating"> 2
+                          <input type="radio" name="radioRating" v-bind:value="2" v-model="newTodo.rating"> 2
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="radioRating" value="3" v-model="newTodo.rating"> 3
+                          <input type="radio" name="radioRating" v-bind:value="3" v-model="newTodo.rating"> 3
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="radioRating" value="4" v-model="newTodo.rating"> 4
+                          <input type="radio" name="radioRating" v-bind:value="4" v-model="newTodo.rating"> 4
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="radioRating" value="5" v-model="newTodo.rating"> 5
+                          <input type="radio" name="radioRating" v-bind:value="5" v-model="newTodo.rating"> 5
                         </label>
                       </div>
                     </div>
@@ -129,12 +129,12 @@
                   <div class="list-group-item-text" v-show="!todo.updating">
                     <p v-if="todo.description">{{todo.description}}</p>
                     <p v-if="todo.dates"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{todo.dates}}</p>
-                    <p v-if="todo.links"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <a :href="todo.links" target="_blank">{{todo.links}}</a></p>
+                    <p v-if="todo.links"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <a :href="todo.links" target="_blank">{{todo.links | truncate(45)}}</a></p>
                     <p v-if="todo.location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <a :href="'https://www.google.fr/maps/search/' + todo.location" target="_blank">{{todo.location}}</a></p>
                     <p v-if="todo.price"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span> {{todo.price}}</p>
-                    <p v-if="todo.tags"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <span class="tag" v-for="tag in todo.tags" :key="tag['.key']">{{tag}}</span></p>
-                    <p v-if="todo.rating != 0">
-                      <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                    <p v-if="todo.tags != ''"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <span class="tag" v-for="tag in todo.tags" :key="tag['.key']">{{tag | capitalize}}</span></p>
+                    <p v-if="todo.rating != 0 && todo.status == 'done'">
+                        <span v-for="n in todo.rating" class="glyphicon glyphicon-star" aria-hidden="true"></span><span v-for="n in (5 - todo.rating)" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                     </p>
                   </div>
 
@@ -194,22 +194,22 @@
                     <div class="form-group" v-show="todo.status == 'done'">
                       <div>
                         <label class="radio-inline">
-                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="0" v-model="todo.rating"> Pas de note
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" v-bind:value="0" v-model="todo.rating"> Pas de note
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="1" v-model="todo.rating"> 1
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" v-bind:value="1" v-model="todo.rating"> 1
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="2" v-model="todo.rating"> 2
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" v-bind:value="2" v-model="todo.rating"> 2
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="3" v-model="todo.rating"> 3
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" v-bind:value="3" v-model="todo.rating"> 3
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="4" v-model="todo.rating"> 4
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" v-bind:value="4" v-model="todo.rating"> 4
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" value="5" v-model="todo.rating"> 5
+                          <input type="radio" v-bind:name="'radioRating' + todo['.key']" v-bind:value="5" v-model="todo.rating"> 5
                         </label>
                       </div>
                     </div>

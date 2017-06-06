@@ -32,12 +32,27 @@ var app = new Vue({
       price: '',
       tags: '',
       photos: '',
-      rating: '0'
+      rating: 0
     }
   },
 
   firebase: {
     todos: todosRef
+  },
+
+  filters: {
+    capitalize: function(value) {
+      if (!value) return '';
+      value = value.toString();
+      return value.charAt(0).toUpperCase() + value.slice(1);
+    },
+    truncate: function(value, limit) {
+      truncValue = value.substring(0, Math.min(limit, value.length));
+      if (value.length > limit) {
+        truncValue = truncValue + '...';
+      }
+      return truncValue;
+    }
   },
 
   methods: {
@@ -48,7 +63,7 @@ var app = new Vue({
 
       //split tags
       var tags = this.newTodo.tags;
-      this.newTodo.tags = tags.replace(/, /g, ',').replace(/ ,/g, ',').split(',');
+      this.newTodo.tags = tags.replace(/(^,)|(,$)/g, '').replace(/ , /g, ',').replace(/, /g, ',').replace(/ ,/g, ',').split(',');
 
       //push data
       todosRef.push(this.newTodo);
@@ -64,7 +79,7 @@ var app = new Vue({
       this.newTodo.tags = '';
       this.newTodo.photos = '';
       this.newTodo.status = 'todo';
-      this.newTodo.rating = '0';
+      this.newTodo.rating = 0;
     },
 
     toggleUpdate: function(todo) {
@@ -81,9 +96,13 @@ var app = new Vue({
       todosRef.child(todo['.key']).child('links').set(todo.links);
       todosRef.child(todo['.key']).child('price').set(todo.price);
       todosRef.child(todo['.key']).child('status').set(todo.status);
+      todosRef.child(todo['.key']).child('rating').set(todo.rating);
+      
       //split tags
-      var tags = todo.tags;
-      todo.tags = tags.replace(/, /g, ',').replace(/ ,/g, ',').split(',');
+      var todotags = todo.tags.toString();
+      //remove trailing commas and split on commas
+      todo.tags = todotags.replace(/(^,)|(,$)/g, '').replace(/ , /g, ',').replace(/, /g, ',').replace(/ ,/g, ',').split(',');
+
       todosRef.child(todo['.key']).child('tags').set(todo.tags);
     },
 

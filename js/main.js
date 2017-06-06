@@ -113,6 +113,8 @@ var app = new Vue({
 
     removeTodo: function(todo) {
       todosRef.child(todo['.key']).remove();
+      //clean local variable
+      this.updating = '';
     }
   }
 });

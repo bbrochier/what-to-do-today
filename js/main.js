@@ -32,7 +32,8 @@ var app = new Vue({
       price: '',
       tags: '',
       photos: '',
-      rating: 0
+      rating: 0,
+      comment: ''
     }
   },
 
@@ -79,6 +80,7 @@ var app = new Vue({
       this.newTodo.photos = '';
       this.newTodo.status = 'todo';
       this.newTodo.rating = 0;
+      this.newTodo.comment = '';
     },
 
     openUpdate: function(todo) {
@@ -100,6 +102,7 @@ var app = new Vue({
       todosRef.child(todo['.key']).child('price').set(todo.price);
       todosRef.child(todo['.key']).child('status').set(todo.status);
       todosRef.child(todo['.key']).child('rating').set(todo.rating);
+      todosRef.child(todo['.key']).child('comment').set(todo.comment);
       
       //split tags
       var todotags = todo.tags.toString();
@@ -107,6 +110,7 @@ var app = new Vue({
       todo.tags = todotags.replace(/(^,)|(,$)/g, '').replace(/ , /g, ',').replace(/, /g, ',').replace(/ ,/g, ',').split(',');
       //set to firebase
       todosRef.child(todo['.key']).child('tags').set(todo.tags);
+      
       //close edit
       this.updating = '';
     },

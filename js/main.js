@@ -17,7 +17,6 @@ var app = new Vue({
   el: '#app',
 
   data: {
-    version: '1.0',
     updating: '',
     newTodo: {
       created: '',
@@ -68,6 +67,9 @@ var app = new Vue({
       //push data
       todosRef.push(this.newTodo);
 
+      //notification
+      toastr.success('"' + this.newTodo.title + '" added !');
+
       //reset display
       this.newTodo.title = '';
       this.newTodo.description = '';
@@ -113,6 +115,9 @@ var app = new Vue({
       
       //close edit
       this.updating = '';
+
+      //notification
+      toastr.success('"' + todo.title + '" updated !');
     },
 
     removeTodo: function(todo) {

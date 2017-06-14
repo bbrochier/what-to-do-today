@@ -2,6 +2,10 @@
   display: none;
 }
 
+body {
+  padding-top: 70px;
+}
+
 .tag {
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -10,8 +14,13 @@
   font-size: 12px;
 }
 
-.color-blue {
-  color:#337ab7;
+.icon-done {
+  color: #2aa82c;
+  font-size: 24px;
+}
+
+.icon-rating {
+  color: #ffbd00;
 }
 
 .margin-right {

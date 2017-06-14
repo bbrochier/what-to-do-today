@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/toastr.min.css">
         <link rel="stylesheet" href="css/main.css">
 
         <!-- Vue -->
@@ -19,116 +20,33 @@
     </head>
 
     <body>
-        <div class="container-fluid" id="app" v-cloak>
-          <div class="row">
-            <div class="col-md-12">
-              <h1>WTDT {{ version }}</h1>
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">WTDT</a>
             </div>
-            <div class="col-md-4">
 
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <form v-on:submit.prevent="addTodo">
-                    <div class="form-group">
-                      <label>Titre</label>
-                      <input type="text" class="form-control" v-model="newTodo.title" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Description</label>
-                      <textarea class="form-control" rows="3" v-model="newTodo.description"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label>Lien</label>
-                      <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" v-model="newTodo.links">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Adresse</label>
-                      <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" v-model="newTodo.location" placeholder="adresse ou coordonnées">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Dates</label>
-                      <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" v-model="newTodo.dates" placeholder="simple, plusieurs, interval, repetition">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Durée</label>
-                      <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" v-model="newTodo.duration">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Prix</label>
-                      <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" v-model="newTodo.price">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Tags</label>
-                      <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" v-model="newTodo.tags" placeholder="tag 1, tag 2, tag 3...">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Status</label>
-                      <div>
-                        <label class="radio-inline">
-                          <input type="radio" name="radioStatus" value="todo" v-model="newTodo.status"> Todo
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="radioStatus" value="done" v-model="newTodo.status"> Done
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form-group" v-show="newTodo.status == 'done'">
-                      <label>Note</label>
-                      <div>
-                        <label class="radio-inline">
-                          <input type="radio" name="radioRating" v-bind:value="0" v-model="newTodo.rating"> Pas de note
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="radioRating" v-bind:value="1" v-model="newTodo.rating"> 1
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="radioRating" v-bind:value="2" v-model="newTodo.rating"> 2
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="radioRating" v-bind:value="3" v-model="newTodo.rating"> 3
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="radioRating" v-bind:value="4" v-model="newTodo.rating"> 4
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="radioRating" v-bind:value="5" v-model="newTodo.rating"> 5
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Comment</label>
-                      <textarea class="form-control" rows="3" v-model="newTodo.comment"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-default btn-primary pull-right" aria-label="Left Align">
-                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
-                    </button>
-                    <br>
-                    <br>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div v-for="todo in todos" :key="todo['.key']" class="well clearfix">
-                  <span v-if="todo.status == 'done'" v-show="updating !== todo['.key']" class="glyphicon glyphicon-ok-sign pull-right color-blue" aria-hidden="true" title="done"></span>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">List todo<span class="sr-only">(current)</span></a></li>
+                <li><a href="add.html">Add new todo</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="container-fluid" id="app" v-cloak>
+          <div class="todo-list">
+            <div v-for="todo in todos" :key="todo['.key']" class="well clearfix">
+                  <span v-if="todo.status == 'done'" v-show="updating !== todo['.key']" class="glyphicon glyphicon-ok-sign pull-right icon-done" aria-hidden="true" title="done"></span>
                   <h4 class="list-group-item-heading" v-show="updating !== todo['.key']">{{todo.title}}</h4>
                   <div class="list-group-item-text" v-show="updating !== todo['.key']">
                     <p v-if="todo.description">{{todo.description}}</p>
@@ -138,7 +56,7 @@
                     <p v-if="todo.price"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span> {{todo.price}}</p>
                     <p v-if="todo.tags != ''"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <span class="tag" v-for="tag in todo.tags" :key="tag['.key']">{{tag | capitalize}}</span></p>
                     <p v-if="todo.rating != 0 && todo.status == 'done'">
-                        <span v-for="n in todo.rating" class="glyphicon glyphicon-star" aria-hidden="true"></span><span v-for="n in (5 - todo.rating)" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                        <span v-for="n in todo.rating" class="glyphicon glyphicon-star icon-rating" aria-hidden="true"></span><span v-for="n in (5 - todo.rating)" class="glyphicon glyphicon-star-empty icon-rating" aria-hidden="true"></span>
                     </p>
                     <blockquote v-if="todo.comment">
                       <p><i>{{todo.comment}}</i></p>
@@ -231,12 +149,12 @@
                   <button class="btn btn-default pull-right margin-right" v-on:click.prevent="closeUpdate(todo)" v-show="updating == todo['.key']">Cancel</button>
                   <button class="btn btn-success pull-right margin-right" v-on:click.prevent="updateTodo(todo)" v-show="updating == todo['.key']"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Update</button>
               </div>
-            </div>
           </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="js/toastr.min.js"></script>
         <script src="js/config.js"></script>
         <script src="js/main.js"></script>
     </body>

@@ -59,6 +59,7 @@ var app = new Vue({
     addTodo: function() {
       //add created date
       this.newTodo.created = Date.now();
+      this.newTodo.updated = Date.now();
 
       //split tags
       var tags = this.newTodo.tags;
